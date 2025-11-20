@@ -9,14 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileServiceImpl implements FileService {
-    private static final String FILE_PATH = "src/main/resources/fruits.csv";
-    private static final String REPORT_FILE_PATH = "src/main/resources/report_fruits.csv";
 
     @Override
-    public List<String> readFromFile() {
+    public List<String> readFromFile(String filePath) {
         List<String> stringList = new ArrayList<>();
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_PATH));) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));) {
             String line;
 
             while ((line = bufferedReader.readLine()) != null) {
@@ -24,19 +22,19 @@ public class FileServiceImpl implements FileService {
             }
 
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path: " + e);
+            throw new RuntimeException("Can't find file by path: " + filePath, e);
         }
 
         return stringList;
     }
 
     @Override
-    public void writeReportToFile(String report) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(REPORT_FILE_PATH))) {
+    public void writeReportToFile(String report, String reportPath) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(reportPath))) {
             bufferedWriter.write(report);
 
         } catch (IOException e) {
-            throw new RuntimeException("Can't write file" + e);
+            throw new RuntimeException("Can't write file" + reportPath, e);
         }
     }
 }

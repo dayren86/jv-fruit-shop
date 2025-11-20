@@ -1,11 +1,14 @@
-package core.basesyntax.service.operation;
+package core.basesyntax.strategy.operation;
 
 import core.basesyntax.dao.FruitsDao;
-import core.basesyntax.dao.FruitsDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 
-public class SupplyOperation implements OperationHandler {
-    private FruitsDao fruitsDao = new FruitsDaoImpl();
+public class ReturnOperation implements OperationHandler {
+    private FruitsDao fruitsDao;
+
+    public ReturnOperation(FruitsDao fruitsDao) {
+        this.fruitsDao = fruitsDao;
+    }
 
     @Override
     public void transaction(FruitTransaction fruitTransaction) {
@@ -13,7 +16,5 @@ public class SupplyOperation implements OperationHandler {
         Integer quantity = fruitBalance.getQuantity() + fruitTransaction.getQuantity();
 
         fruitBalance.setQuantity(quantity);
-
-        fruitsDao.set(fruitBalance);
     }
 }

@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.operation.OperationHandler;
+import core.basesyntax.strategy.operation.OperationHandler;
 import java.util.List;
 
 public class ShopServiceImpl implements ShopService {

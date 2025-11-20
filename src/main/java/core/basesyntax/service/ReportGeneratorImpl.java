@@ -1,11 +1,14 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitsDao;
-import core.basesyntax.dao.FruitsDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private FruitsDao fruitsDao = new FruitsDaoImpl();
+    private FruitsDao fruitsDao;
+
+    public ReportGeneratorImpl(FruitsDao fruitsDao) {
+        this.fruitsDao = fruitsDao;
+    }
 
     @Override
     public String getReport() {
