@@ -16,7 +16,5 @@ public class SupplyOperation implements OperationHandler {
         Integer quantity = fruitBalance.getQuantity() + fruitTransaction.getQuantity();
 
         fruitBalance.setQuantity(quantity);
-
-        fruitsDao.set(fruitBalance);
     }
 }

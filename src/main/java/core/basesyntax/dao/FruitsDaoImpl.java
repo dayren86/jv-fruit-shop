@@ -16,7 +16,7 @@ public class FruitsDaoImpl implements FruitsDao {
         return Storage.fruitsStorage.stream()
                 .filter(f -> f.getName().equals(fruits.getName()))
                 .findFirst().orElseThrow(() -> new RuntimeException(
-                        "Can,t find fruit " + fruits.getName()));
+                        "Can't find fruit " + fruits.getName()));
     }
 
     @Override

@@ -13,8 +13,8 @@ public class DataConverterImpl implements DataConverter {
 
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
 
-        for (String string : listTransactionFromFile) {
-            String[] split = string.split(",");
+        for (int i = 1; i < listTransactionFromFile.size(); i++) {
+            String[] split = listTransactionFromFile.get(i).split(",");
 
             FruitTransaction.Operation operation = convertOperation(split[0]);
 
@@ -23,6 +23,7 @@ public class DataConverterImpl implements DataConverter {
             FruitTransaction fruitTransaction = new FruitTransaction(
                     operation, split[1], Integer.parseInt(split[2]));
             fruitTransactions.add(fruitTransaction);
+
         }
 
         return fruitTransactions;

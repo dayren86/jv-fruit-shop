@@ -34,7 +34,7 @@ public class FileServiceImpl implements FileService {
             bufferedWriter.write(report);
 
         } catch (IOException e) {
-            throw new RuntimeException("Can't write file" + reportPath, e);
+            throw new RuntimeException("Can't write file " + reportPath, e);
         }
     }
 }
