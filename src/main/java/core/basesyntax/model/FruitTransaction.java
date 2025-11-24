@@ -1,14 +1,11 @@
 package core.basesyntax.model;
 
-import java.util.Objects;
+import java.util.Arrays;
 
 public class FruitTransaction {
     private Operation operation;
     private String name;
     private Integer quantity;
-
-    public FruitTransaction() {
-    }
 
     public FruitTransaction(Operation operation, String name, Integer quantity) {
         this.operation = operation;
@@ -45,20 +42,6 @@ public class FruitTransaction {
                 + '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        FruitTransaction that = (FruitTransaction) o;
-        return Objects.equals(name, that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(name);
-    }
-
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -71,8 +54,11 @@ public class FruitTransaction {
             this.code = code;
         }
 
-        public String getCode() {
-            return code;
+        public Operation getCode(String operation) {
+            return Arrays.stream(values())
+                    .filter(o -> o.code.equals(operation))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalStateException("Unexpected value: " + operation));
         }
     }
 }

@@ -5,6 +5,8 @@ import core.basesyntax.model.FruitTransaction;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private FruitsDao fruitsDao;
+    private static final String COMMA = ",";
+    private static final String HEADER = "fruit,quantity";
 
     public ReportGeneratorImpl(FruitsDao fruitsDao) {
         this.fruitsDao = fruitsDao;
@@ -13,13 +15,13 @@ public class ReportGeneratorImpl implements ReportGenerator {
     @Override
     public String getReport() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("fruit,quantity\n");
+        stringBuilder.append(HEADER).append(System.lineSeparator());
 
         for (FruitTransaction fruitTransaction : fruitsDao.getAll()) {
             stringBuilder.append(fruitTransaction.getName())
-                    .append(",")
+                    .append(COMMA)
                     .append(fruitTransaction.getQuantity())
-                    .append('\n');
+                    .append(System.lineSeparator());
         }
 
         return stringBuilder.toString();
