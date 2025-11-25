@@ -7,6 +7,9 @@ public class FruitTransaction {
     private String name;
     private Integer quantity;
 
+    public FruitTransaction() {
+    }
+
     public FruitTransaction(Operation operation, String name, Integer quantity) {
         this.operation = operation;
         this.name = name;
@@ -31,6 +34,10 @@ public class FruitTransaction {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

@@ -12,9 +12,10 @@ public class ReturnOperation implements OperationHandler {
 
     @Override
     public void transaction(FruitTransaction fruitTransaction) {
-        FruitTransaction fruitBalance = fruitsDao.get(fruitTransaction);
-        Integer quantity = fruitBalance.getQuantity() + fruitTransaction.getQuantity();
+        Integer i = fruitsDao.get(fruitTransaction.getName());
 
-        fruitBalance.setQuantity(quantity);
+        int quantity = i + fruitTransaction.getQuantity();
+
+        fruitsDao.set(fruitTransaction.getName(), quantity);
     }
 }

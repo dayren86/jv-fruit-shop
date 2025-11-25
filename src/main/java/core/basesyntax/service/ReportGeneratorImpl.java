@@ -1,12 +1,12 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitsDao;
-import core.basesyntax.model.FruitTransaction;
+import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private FruitsDao fruitsDao;
     private static final String COMMA = ",";
     private static final String HEADER = "fruit,quantity";
+    private FruitsDao fruitsDao;
 
     public ReportGeneratorImpl(FruitsDao fruitsDao) {
         this.fruitsDao = fruitsDao;
@@ -17,10 +17,10 @@ public class ReportGeneratorImpl implements ReportGenerator {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(HEADER).append(System.lineSeparator());
 
-        for (FruitTransaction fruitTransaction : fruitsDao.getAll()) {
-            stringBuilder.append(fruitTransaction.getName())
+        for (Map.Entry<String, Integer> storageMap : fruitsDao.getAll().entrySet()) {
+            stringBuilder.append(storageMap.getKey())
                     .append(COMMA)
-                    .append(fruitTransaction.getQuantity())
+                    .append(storageMap.getValue())
                     .append(System.lineSeparator());
         }
 

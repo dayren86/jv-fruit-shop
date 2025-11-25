@@ -12,14 +12,14 @@ public class PurchaseOperation implements OperationHandler {
 
     @Override
     public void transaction(FruitTransaction fruitTransaction) {
-        FruitTransaction fruitBalance = fruitsDao.get(fruitTransaction);
+        Integer i = fruitsDao.get(fruitTransaction.getName());
 
-        int quantity = fruitBalance.getQuantity() - fruitTransaction.getQuantity();
+        int quantity = i - fruitTransaction.getQuantity();
 
         if (quantity < 0) {
             throw new RuntimeException("Quantity negative value");
         }
 
-        fruitBalance.setQuantity(quantity);
+        fruitsDao.set(fruitTransaction.getName(), quantity);
     }
 }

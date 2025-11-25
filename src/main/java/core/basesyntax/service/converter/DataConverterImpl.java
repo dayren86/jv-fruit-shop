@@ -5,30 +5,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
+    private static final int INDEX_OF_HEADER = 0;
+    private static final String DELIMITER = ",";
+    private static final int INDEX_OF_FRUIT = 1;
+    private static final int INDEX_OF_QUANTITY = 2;
+    private static final int INDEX_OF_OPERATION = 0;
+
     @Override
     public List<FruitTransaction> convertFruitTransactions(List<String> listTransactionFromFile) {
         if (listTransactionFromFile == null) {
             throw new RuntimeException("List transaction empty");
         }
 
+        return updateDataInStorage(listTransactionFromFile);
+    }
+
+    private List<FruitTransaction> updateDataInStorage(List<String> readData) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
-
-        for (int i = 1; i < listTransactionFromFile.size(); i++) {
-            String[] split = listTransactionFromFile.get(i).split(",");
-
-            //I don't understand how this works. How else can I access getCode?
-            FruitTransaction.Operation operation = FruitTransaction.Operation.SUPPLY.getCode(split[0]);
-
-            checkValidationSlitString(split);
-
-            FruitTransaction fruitTransaction = new FruitTransaction(
-                    operation, split[1], Integer.parseInt(split[2]));
-            fruitTransactions.add(fruitTransaction);
-
+        readData.remove(INDEX_OF_HEADER);
+        for (String line : readData) {
+            FruitTransaction transaction = new FruitTransaction();
+            String[] separatedData = line.split(DELIMITER);
+            checkValidationSlitString(separatedData);
+            transaction.setName(separatedData[INDEX_OF_FRUIT]);
+            transaction.setQuantity(Integer.parseInt(separatedData[INDEX_OF_QUANTITY]));
+            transaction.setOperation(
+                    FruitTransaction.Operation.SUPPLY.getCode(separatedData[INDEX_OF_OPERATION]));
+            fruitTransactions.add(transaction);
         }
-
         return fruitTransactions;
     }
+
+//   I still haven't figured it out.
+//    private void updateNumberOfFruitInTransaction(String code, FruitTransaction transaction) {
+//        OperationHandler handlerForTransaction = operationStrategy
+//                .getOperationHandler(Operation.getOperation(code));
+//        handlerForTransaction.updateNumberOfFruit(transaction);
+//    }
 
     private void checkValidationSlitString(String[] splitString) {
         if (splitString.length != 3) {
