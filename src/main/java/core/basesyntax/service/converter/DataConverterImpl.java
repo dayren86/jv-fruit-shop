@@ -36,12 +36,12 @@ public class DataConverterImpl implements DataConverter {
         return fruitTransactions;
     }
 
-//   I still haven't figured it out.
-//    private void updateNumberOfFruitInTransaction(String code, FruitTransaction transaction) {
-//        OperationHandler handlerForTransaction = operationStrategy
-//                .getOperationHandler(Operation.getOperation(code));
-//        handlerForTransaction.updateNumberOfFruit(transaction);
-//    }
+    /*  I still haven't figured it out.
+    private void updateNumberOfFruitInTransaction(String code, FruitTransaction transaction) {
+        OperationHandler handlerForTransaction = operationStrategy
+                .getOperationHandler(Operation.getOperation(code));
+        handlerForTransaction.updateNumberOfFruit(transaction);
+        */
 
     private void checkValidationSlitString(String[] splitString) {
         if (splitString.length != 3) {
