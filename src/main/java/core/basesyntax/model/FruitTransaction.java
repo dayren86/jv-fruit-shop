@@ -61,7 +61,7 @@ public class FruitTransaction {
             this.code = code;
         }
 
-        public Operation getCode(String operation) {
+        public static Operation getCode(String operation) {
             return Arrays.stream(values())
                     .filter(o -> o.code.equals(operation))
                     .findFirst()

@@ -30,18 +30,11 @@ public class DataConverterImpl implements DataConverter {
             transaction.setName(separatedData[INDEX_OF_FRUIT]);
             transaction.setQuantity(Integer.parseInt(separatedData[INDEX_OF_QUANTITY]));
             transaction.setOperation(
-                    FruitTransaction.Operation.SUPPLY.getCode(separatedData[INDEX_OF_OPERATION]));
+                    FruitTransaction.Operation.getCode(separatedData[INDEX_OF_OPERATION]));
             fruitTransactions.add(transaction);
         }
         return fruitTransactions;
     }
-
-    /*  I still haven't figured it out.
-    private void updateNumberOfFruitInTransaction(String code, FruitTransaction transaction) {
-        OperationHandler handlerForTransaction = operationStrategy
-                .getOperationHandler(Operation.getOperation(code));
-        handlerForTransaction.updateNumberOfFruit(transaction);
-        */
 
     private void checkValidationSlitString(String[] splitString) {
         if (splitString.length != 3) {
